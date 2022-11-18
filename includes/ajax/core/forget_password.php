@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ajax -> core -> forget password
  * 
@@ -14,17 +13,20 @@ require('../../../bootstrap.php');
 is_ajax();
 
 // check user logged in
-if ($user->_logged_in) {
-  return_json(array('callback' => 'window.location.reload();'));
+if($user->_logged_in) {
+    return_json( array('callback' => 'window.location.reload();') );
 }
 
 try {
 
-  // forget password
-  $user->forget_password($_POST['email'], $_POST['g-recaptcha-response']);
+	// forget password
+	$user->forget_password($_POST['email'], $_POST['g-recaptcha-response']);
 
-  // return
-  modal("#forget-password-confirm", "{email: '" . $_POST['email'] . "'}");
+	// return
+	modal("#forget-password-confirm", "{email: '".$_POST['email']."'}");
+	
 } catch (Exception $e) {
-  return_json(array('error' => true, 'message' => $e->getMessage()));
+	return_json( array('error' => true, 'message' => $e->getMessage()) );
 }
+
+?>

@@ -4,4 +4,4 @@
 
 {__("Two-factor authentication key")}: {$two_factor_key}
 
-{__($system['system_title'])} {__("Team")}
+{$system['system_title']} {__("Team")}

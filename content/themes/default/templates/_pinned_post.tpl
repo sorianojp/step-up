@@ -1,6 +1,6 @@
 <!-- posts-filter -->
 <div class="posts-filter">
-  <span>{__("Pinned Post")}</span>
+    <span>{__("Pinned Post")}</span>
 </div>
 <!-- posts-filter -->
 

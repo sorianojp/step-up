@@ -3,4 +3,4 @@
 {$user->_data['name']} {$notification['message']}
 {$notification['url']}
 
-{__($system['system_title'])} {__("Team")}
+{$system['system_title']} {__("Team")}

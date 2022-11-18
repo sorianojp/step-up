@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ajax -> posts -> scraper
  * 
@@ -17,8 +16,8 @@ is_ajax();
 user_access(true);
 
 // valid inputs
-if (!isset($_POST['query']) || is_empty($_POST['query'])) {
-  _error(403);
+if(!isset($_POST['query']) || is_empty($_POST['query'])) {
+	_error(403);
 }
 
 // initialize the return array
@@ -26,14 +25,18 @@ $return = array();
 
 try {
 
-  // scraper
-  $link = $user->scraper(trim($_POST['query']));
-  if ($link) {
-    /* return */
-    $return['link'] = $link;
-  }
+	// scraper
+	$link = $user->scraper(trim($_POST['query']));
+	if($link) {
+		/* return */
+		$return['link'] = $link;
+	}
+
 } catch (Exception $e) {
+	
 }
 
 // return & exit
 return_json($return);
+
+?>

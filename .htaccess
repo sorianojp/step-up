@@ -6,10 +6,6 @@ Options -MultiViews
 	Order Allow,Deny
 	Deny from all
 </FilesMatch>
-<FilesMatch "(composer.json|composer.lock|package.json|package-lock.json)$">
-	Order Allow,Deny
-	Deny from all
-</FilesMatch>
 <IfModule mod_security.c>
 	SecFilterScanPOST Off
 </IfModule>
@@ -106,9 +102,7 @@ RewriteRule ^directory/([^/]+)/([^/]+)/?$ directory.php?view=$1&page=$2 [L,QSA]
 # Search
 RewriteRule ^search/?$ search.php [L,QSA]
 RewriteRule ^search/hashtag/([^/]+)/?$ search.php?query=$1&hashtag=1 [L,QSA]
-RewriteRule ^search/hashtag/([^/]+)/([^/]+)/?$ search.php?query=$1&tab=$2&hashtag=1 [L,QSA]
 RewriteRule ^search/([^/]+)/?$ search.php?query=$1&hashtag=0 [L,QSA]
-RewriteRule ^search/([^/]+)/([^/]+)/?$ search.php?query=$1&tab=$2&hashtag=0 [L,QSA]
 
 # Developers
 RewriteRule ^api/([^/]+)/?$ api.php?do=$1 [L,QSA]
@@ -118,8 +112,7 @@ RewriteRule ^developers/edit/([^/]+)/?$ developers.php?view=edit&app_auth_id=$1 
 RewriteRule ^share/?$ share.php [L,QSA]
 
 # Packages
-RewriteRule ^packages/?$ packages.php?view=packages [L,QSA]
-RewriteRule ^upgraded/?$ packages.php?view=upgraded [L,QSA]
+RewriteRule ^packages/?$ packages.php [L,QSA]
 
 # Messages
 RewriteRule ^messages/?$ messages.php [L,QSA]

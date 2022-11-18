@@ -2,4 +2,4 @@
 
 {__("This is a test email")}
 
-{__($system['system_title'])} {__("Team")}
+{$system['system_title']} {__("Team")}

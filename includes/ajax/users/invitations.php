@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ajax -> user -> invitations
  * 
@@ -17,75 +16,80 @@ is_ajax();
 user_access(true);
 
 // check demo account
-if ($user->_data['user_demo']) {
-  modal("ERROR", __("Demo Restriction"), __("You can't do this with demo account"));
+if($user->_data['user_demo']) {
+    modal("ERROR", __("Demo Restriction"), __("You can't do this with demo account"));
 }
 
 // handle invitation
 switch ($_GET['do']) {
-  case 'generate':
-    try {
+	case 'generate':
+		try {
 
-      // initialize the return array
-      $return = array();
+			// initialize the return array
+			$return = array();
 
-      // generate new invitation code
-      $code = $user->generate_invitation_code();
-      /* assign variables */
-      $smarty->assign('code', $code);
-      /* return */
-      $return['template'] = $smarty->fetch("ajax.invitations.tpl");
-      $return['callback'] = "$('#modal').modal('show'); $('.modal-content:last').html(response.template);";
+			// generate new invitation code
+			$code = $user->generate_invitation_code();
+			/* assign variables */
+			$smarty->assign('code', $code);
+			/* return */
+			$return['template'] = $smarty->fetch("ajax.invitations.tpl");
+			$return['callback'] = "$('#modal').modal('show'); $('.modal-content:last').html(response.template);";
 
-      // return & exit
-      return_json($return);
-    } catch (Exception $e) {
-      modal("ERROR", __("Error"), $e->getMessage());
-    }
-    break;
+			// return & exit
+			return_json($return);
 
-  case 'share':
-    try {
+		} catch (Exception $e) {
+			modal("ERROR", __("Error"), $e->getMessage());
+		}
+		break;
 
-      // initialize the return array
-      $return = array();
+	case 'share':
+		try {
 
-      // prepare email
-      /* assign variables */
-      $smarty->assign('code', $_GET['code']);
-      /* return */
-      $return['template'] = $smarty->fetch("ajax.invitations.tpl");
-      $return['callback'] = "$('#modal').modal('show'); $('.modal-content:last').html(response.template);";
+			// initialize the return array
+			$return = array();
 
-      // return & exit
-      return_json($return);
-    } catch (Exception $e) {
-      modal("ERROR", __("Error"), $e->getMessage());
-    }
-    break;
+			// prepare email
+			/* assign variables */
+			$smarty->assign('code', $_GET['code']);
+			/* return */
+			$return['template'] = $smarty->fetch("ajax.invitations.tpl");
+			$return['callback'] = "$('#modal').modal('show'); $('.modal-content:last').html(response.template);";
 
-  case 'send':
-    try {
+			// return & exit
+			return_json($return);
 
-      // send invitation code
-      switch ($_POST['send_method']) {
-        case 'email':
-          $user->send_invitation_email($_POST['email'], $_POST['code']);
-          break;
+		} catch (Exception $e) {
+			modal("ERROR", __("Error"), $e->getMessage());
+		}
+		break;
 
-        case 'sms':
-          $user->send_invitation_sms($_POST['phone'], $_POST['code']);
-          break;
-      }
+	case 'send':
+		try {
 
-      // return
-      return_json(array('success' => true, 'message' => __("Your invitation has been sent")));
-    } catch (Exception $e) {
-      return_json(array('error' => true, 'message' => $e->getMessage()));
-    }
-    break;
+			// send invitation code
+			switch ($_POST['send_method']) {
+				case 'email':
+					$user->send_invitation_email($_POST['email'], $_POST['code']);
+					break;
+				
+				case 'sms':
+					$user->send_invitation_sms($_POST['phone'], $_POST['code']);
+					break;
+			}
 
-  default:
-    _error(400);
-    break;
+			// return
+			return_json( array('success' => true, 'message' => __("Your invitation has been sent")) );
+
+		} catch (Exception $e) {
+			return_json( array('error' => true, 'message' => $e->getMessage()) );
+		}
+		break;
+
+	default:
+		_error(400);
+		break;
 }
+
+?>

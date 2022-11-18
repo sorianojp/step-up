@@ -10,4 +10,4 @@
 
 {__("Email Message")}: {$_POST['message']}
 
-{__($system['system_title'])} {__("Team")}
+{$system['system_title']} {__("Team")}
