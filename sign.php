@@ -1,4 +1,5 @@
 <?php
+
 /**
  * sign
  * 
@@ -10,91 +11,91 @@
 require('bootloader.php');
 
 switch ($_GET['do']) {
-	case 'in':
-		// check user logged in
-		if($user->_logged_in) {
-		    redirect();
-		}
+  case 'in':
+    // check user logged in
+    if ($user->_logged_in) {
+      redirect();
+    }
 
-		// page header
-		page_header($system['system_title']." &rsaquo; ".__("Login"));
+    // page header
+    page_header(__($system['system_title']) . " &rsaquo; " . __("Login"));
 
-		// get genders
-		$genders = $user->get_genders();
-		/* assign variables */
-		$smarty->assign('genders', $genders);
+    // get genders
+    $smarty->assign('genders', $user->get_genders());
 
-		// get custom fields
-		$smarty->assign('custom_fields', $user->get_custom_fields());
+    // get countries
+    $smarty->assign('countries', $user->get_countries());
 
-		// assign varible
-		$smarty->assign('do', $_GET['do']);
+    // get custom fields
+    $smarty->assign('custom_fields', $user->get_custom_fields());
 
-		// page footer
-		page_footer("sign");
-		break;
-	
-	case 'up':
-		// check user logged in
-		if($user->_logged_in) {
-		    header('Location: '.$system['system_url']);
-		}
+    // assign varible
+    $smarty->assign('do', $_GET['do']);
 
-		// check if registration enabled
-		if(!$system['registration_enabled']) {
-			_error(404);
-		}
+    // page footer
+    page_footer("sign");
+    break;
 
-		// page header
-		page_header($system['system_title']." &rsaquo; ".__("Sign Up"));
+  case 'up':
+    // check user logged in
+    if ($user->_logged_in) {
+      header('Location: ' . $system['system_url']);
+    }
 
-		// get genders
-		$genders = $user->get_genders();
-		/* assign variables */
-		$smarty->assign('genders', $genders);
+    // check if registration enabled
+    if (!$system['registration_enabled']) {
+      _error(404);
+    }
 
-		// get custom fields
-		$smarty->assign('custom_fields', $user->get_custom_fields());
+    // page header
+    page_header(__($system['system_title']) . " &rsaquo; " . __("Sign Up"));
 
-		// get invitation code
-		if($system['invitation_enabled'] && isset($_GET['invitation_code'])) {
-			$smarty->assign('invitation_code', htmlentities($_GET['invitation_code'], ENT_QUOTES, 'utf-8'));
-		}
+    // get genders
+    $smarty->assign('genders', $user->get_genders());
 
-		// assign varible
-		$smarty->assign('do', $_GET['do']);
+    // get countries
+    $smarty->assign('countries', $user->get_countries());
 
-		// page footer
-		page_footer("sign");
-		break;
+    // get custom fields
+    $smarty->assign('custom_fields', $user->get_custom_fields());
 
-	case 'out':
-		// check user logged in
-		if(!$user->_logged_in) {
-			redirect();
-		}
+    // get invitation code
+    if ($system['invitation_enabled'] && isset($_GET['invitation_code'])) {
+      $smarty->assign('invitation_code', htmlentities($_GET['invitation_code'], ENT_QUOTES, 'utf-8'));
+    }
 
-		// sign out
-		$user->sign_out();
-		redirect();
-		break;
+    // assign varible
+    $smarty->assign('do', $_GET['do']);
 
-	case 'reset':
-		// check user logged in
-		if($user->_logged_in) {
-		    redirect();
-		}
+    // page footer
+    page_footer("sign");
+    break;
 
-		// page header
-		page_header($system['system_title']." &rsaquo; ".__("Forgot your password?"));
+  case 'out':
+    // check user logged in
+    if (!$user->_logged_in) {
+      redirect();
+    }
 
-		// page footer
-		page_footer("reset");
-		break;
+    // sign out
+    $user->sign_out();
+    redirect();
+    break;
 
-	default:
-		_error(404);
-		break;
+  case 'reset':
+    // check user logged in
+    if ($user->_logged_in) {
+      redirect();
+    }
+
+    // page header
+    page_header(__($system['system_title']) . " &rsaquo; " . __("Forgot your password?"));
+
+    // page footer
+    page_footer("reset");
+    break;
+
+  default:
+    _error(404);
+    break;
 }
-
-?>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ajax -> pages_groups_events -> add
  * 
@@ -16,68 +17,62 @@ is_ajax();
 user_access(true);
 
 // check demo account
-if($user->_data['user_demo']) {
-    modal("ERROR", __("Demo Restriction"), __("You can't do this with demo account"));
+if ($user->_data['user_demo']) {
+  modal("ERROR", __("Demo Restriction"), __("You can't do this with demo account"));
 }
 
 try {
 
-	// initialize the return array
-	$return = array();
+  // initialize the return array
+  $return = array();
 
-	switch ($_REQUEST['type']) {
-		case 'page':
-			// get custom fields
-			$smarty->assign('custom_fields', $user->get_custom_fields( array("for" => "page") ));
+  switch ($_REQUEST['type']) {
+    case 'page':
+      // get custom fields
+      $smarty->assign('custom_fields', $user->get_custom_fields(array("for" => "page")));
 
-			// get pages categories
-			$categories = $user->get_categories("pages_categories");
-			/* assign variables */
-			$smarty->assign('categories', $categories);
+      // get pages categories
+      $smarty->assign('categories', $user->get_categories("pages_categories"));
 
-			// return
-			$return['template'] = $smarty->fetch("ajax.page.publisher.tpl");
-			$return['callback'] = "$('#modal').modal('show'); $('.modal-content:last').html(response.template); initialize_modal();";
-			break;
+      // get countries
+      $smarty->assign('countries', $user->get_countries());
 
-		case 'group':
-			// get custom fields
-			$smarty->assign('custom_fields', $user->get_custom_fields( array("for" => "group") ));
+      // return
+      $return['template'] = $smarty->fetch("ajax.page.publisher.tpl");
+      $return['callback'] = "$('#modal').modal('show'); $('.modal-content:last').html(response.template); initialize_modal();";
+      break;
 
-			// get groups categories
-			$categories = $user->get_categories("groups_categories");
-			/* assign variables */
-			$smarty->assign('categories', $categories);
+    case 'group':
+      // get custom fields
+      $smarty->assign('custom_fields', $user->get_custom_fields(array("for" => "group")));
 
-			// return
-			$return['template'] = $smarty->fetch("ajax.group.publisher.tpl");
-			$return['callback'] = "$('#modal').modal('show'); $('.modal-content:last').html(response.template); initialize_modal();";
-			break;
+      // get groups categories
+      $smarty->assign('categories', $user->get_categories("groups_categories"));
 
-		case 'event':
-			// get custom fields
-			$smarty->assign('custom_fields', $user->get_custom_fields( array("for" => "event") ));
+      // return
+      $return['template'] = $smarty->fetch("ajax.group.publisher.tpl");
+      $return['callback'] = "$('#modal').modal('show'); $('.modal-content:last').html(response.template); initialize_modal();";
+      break;
 
-			// get events categories
-			$categories = $user->get_categories("events_categories");
-			/* assign variables */
-			$smarty->assign('categories', $categories);
+    case 'event':
+      // get custom fields
+      $smarty->assign('custom_fields', $user->get_custom_fields(array("for" => "event")));
 
-			// return
-			$return['template'] = $smarty->fetch("ajax.event.publisher.tpl");
-			$return['callback'] = "$('#modal').modal('show'); $('.modal-content:last').html(response.template); initialize_modal();";
-			break;
-			
-		default:
-			_error(400);
-			break;
-	}
+      // get events categories
+      $smarty->assign('categories', $user->get_categories("events_categories"));
 
-	// return & exit
-	return_json($return);
+      // return
+      $return['template'] = $smarty->fetch("ajax.event.publisher.tpl");
+      $return['callback'] = "$('#modal').modal('show'); $('.modal-content:last').html(response.template); initialize_modal();";
+      break;
 
+    default:
+      _error(400);
+      break;
+  }
+
+  // return & exit
+  return_json($return);
 } catch (Exception $e) {
-	modal("ERROR", __("Error"), $e->getMessage());
+  modal("ERROR", __("Error"), $e->getMessage());
 }
-
-?>

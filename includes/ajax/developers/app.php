@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ajax -> developers -> app
  * 
@@ -16,71 +17,68 @@ is_ajax();
 user_access(true);
 
 // check demo account
-if($user->_data['user_demo']) {
-    modal("ERROR", __("Demo Restriction"), __("You can't do this with demo account"));
+if ($user->_data['user_demo']) {
+  modal("ERROR", __("Demo Restriction"), __("You can't do this with demo account"));
 }
 
 try {
 
-	switch ($_REQUEST['do']) {
-		case 'create':
-			// create app
-			$user->create_app($_POST);
-			
-			// return
-			return_json( array('callback' => 'window.location = site_path + "/developers/apps"') );
-			break;
+  switch ($_REQUEST['do']) {
+    case 'create':
+      // create app
+      $user->create_app($_POST);
 
-		case 'edit':
-			// valid inputs
-			if(!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-				_error(400);
-			}
+      // return
+      return_json(array('callback' => 'window.location = site_path + "/developers/apps"'));
+      break;
 
-			// edit app
-			$user->edit_app($_GET['id'], $_POST);
-			
-			// return
-			return_json( array('success' => true, 'message' => __("App settings have been updated")) );
-			break;
+    case 'edit':
+      // valid inputs
+      if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+        _error(400);
+      }
 
-		case 'delete':
-			// valid inputs
-			if(!isset($_POST['id']) || !is_numeric($_POST['id'])) {
-				_error(400);
-			}
+      // edit app
+      $user->edit_app($_GET['id'], $_POST);
 
-			// delete app
-			$user->delete_app($_POST['id']);
-			
-			// return
-			return_json( array('callback' => 'window.location.reload();') );
-			break;
+      // return
+      return_json(array('success' => true, 'message' => __("App settings have been updated")));
+      break;
 
-		case 'oauth':
-			// valid inputs
-			if(!isset($_POST['id']) || !is_numeric($_POST['id'])) {
-				_error(400);
-			}
+    case 'delete':
+      // valid inputs
+      if (!isset($_POST['id']) || !is_numeric($_POST['id'])) {
+        _error(400);
+      }
 
-			// oauth app
-			$redirect_URL = $user->oauth_app($_POST['id'], true);
-			
-			// return
-			return_json( array('redirect_url' => $redirect_URL) );
-			break;
+      // delete app
+      $user->delete_app($_POST['id']);
 
-		default:
-			_error(400);
-			break;
-	}
-	
+      // return
+      return_json(array('callback' => 'window.location.reload();'));
+      break;
+
+    case 'oauth':
+      // valid inputs
+      if (!isset($_POST['id']) || !is_numeric($_POST['id'])) {
+        _error(400);
+      }
+
+      // oauth app
+      $redirect_URL = $user->oauth_app($_POST['id'], true);
+
+      // return
+      return_json(array('redirect_url' => $redirect_URL));
+      break;
+
+    default:
+      _error(400);
+      break;
+  }
 } catch (Exception $e) {
-	if($_REQUEST['do'] == "create" || $_REQUEST['do'] == "edit") {
-		return_json( array('error' => true, 'message' => $e->getMessage()) );
-	} else {
-		modal("ERROR", __("Error"), $e->getMessage());
-	}
+  if ($_REQUEST['do'] == "create" || $_REQUEST['do'] == "edit") {
+    return_json(array('error' => true, 'message' => $e->getMessage()));
+  } else {
+    modal("ERROR", __("Error"), $e->getMessage());
+  }
 }
-
-?>

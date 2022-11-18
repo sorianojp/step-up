@@ -1,6 +1,6 @@
 <!-- posts-filter -->
 <div class="posts-filter">
-    <span>{__("Promoted Posts")}</span>
+  <span>{__("Promoted Posts")}</span>
 </div>
 <!-- posts-filter -->
 

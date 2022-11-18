@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ajax -> core -> activation phone confirm
  * 
@@ -13,20 +14,17 @@ require('../../../bootstrap.php');
 is_ajax();
 
 // check user logged in
-if(!$user->_logged_in) {
-	modal('LOGIN');
+if (!$user->_logged_in) {
+  modal('LOGIN');
 }
 
 try {
 
-	// activation phone confirm
-	$user->activation_phone($_POST['token']);
+  // activation phone confirm
+  $user->activation_phone($_POST['token']);
 
-	// return
-	return_json( array('callback' => 'window.location.reload();') );
-	
+  // return
+  return_json(array('callback' => 'window.location.reload();'));
 } catch (Exception $e) {
-	return_json( array('error' => true, 'message' => $e->getMessage()) );
+  return_json(array('error' => true, 'message' => $e->getMessage()));
 }
-
-?>

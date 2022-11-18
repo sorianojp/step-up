@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ajax -> data -> mention
  * 
@@ -13,25 +14,22 @@ require('../../../bootstrap.php');
 is_ajax();
 
 // check user logged in
-if(!$user->_logged_in) {
-    modal('LOGIN');
+if (!$user->_logged_in) {
+  modal('LOGIN');
 }
 
 // valid inputs
-if(!isset($_GET['term'])) {
-	_error(400);
+if (!isset($_GET['term'])) {
+  _error(400);
 }
 
 try {
 
-	// get users
-	$users = $user->get_users($_GET['term'], [], true);
+  // get users
+  $users = $user->get_users($_GET['term'], [], true);
 
-	// return & exit
-	return_json($users);
-
+  // return & exit
+  return_json($users);
 } catch (Exception $e) {
-	modal("ERROR", __("Error"), $e->getMessage());
+  modal("ERROR", __("Error"), $e->getMessage());
 }
-
-?>

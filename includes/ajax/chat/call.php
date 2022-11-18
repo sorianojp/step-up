@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ajax -> chat -> call
  * 
@@ -16,90 +17,87 @@ is_ajax();
 user_access(true);
 
 // check demo account
-if($user->_data['user_demo']) {
-    modal("ERROR", __("Demo Restriction"), __("You can't do this with demo account"));
+if ($user->_data['user_demo']) {
+  modal("ERROR", __("Demo Restriction"), __("You can't do this with demo account"));
 }
 
 // valid inputs
-if(!isset($_POST['type']) || !in_array($_POST['type'], ['video','audio'])) {
-	_error(400);
+if (!isset($_POST['type']) || !in_array($_POST['type'], ['video', 'audio'])) {
+  _error(400);
 }
 
 try {
 
-	// initialize the return array
-	$return = array();
+  // initialize the return array
+  $return = array();
 
-	switch ($_POST['do']) {
-		case 'create_call':
-			// valid inputs
-			if(!isset($_POST['user_id']) || !is_numeric($_POST['user_id'])) {
-				_error(400);
-			}
-			
-			// create call
-			$call_id = $user->create_call($_POST['type'], $_POST['user_id']);
+  switch ($_POST['do']) {
+    case 'create_call':
+      // valid inputs
+      if (!isset($_POST['user_id']) || !is_numeric($_POST['user_id'])) {
+        _error(400);
+      }
 
-		    // return
-		    $return['call_id'] = $call_id;
-			break;
+      // create call
+      $call_id = $user->create_call($_POST['type'], $_POST['user_id']);
 
-		case 'check_calling_response':
-			// valid inputs
-			if(!isset($_POST['id']) || !is_numeric($_POST['id'])) {
-				_error(400);
-			}
+      // return
+      $return['call_id'] = $call_id;
+      break;
 
-			// check call response
-			$call = $user->check_calling_response($_POST['type'], $_POST['id']);
+    case 'check_calling_response':
+      // valid inputs
+      if (!isset($_POST['id']) || !is_numeric($_POST['id'])) {
+        _error(400);
+      }
 
-			// return
-		    $return['call'] = $call;
-			break;
+      // check call response
+      $call = $user->check_calling_response($_POST['type'], $_POST['id']);
 
-		case 'answer_call':
-			// valid inputs
-			if(!isset($_POST['id']) || !is_numeric($_POST['id'])) {
-				_error(400);
-			}
+      // return
+      $return['call'] = $call;
+      break;
 
-			// answer call
-			$call = $user->answer_call($_POST['type'], $_POST['id']);
+    case 'answer_call':
+      // valid inputs
+      if (!isset($_POST['id']) || !is_numeric($_POST['id'])) {
+        _error(400);
+      }
 
-			// return
-		    $return['call'] = $call;
-			break;
+      // answer call
+      $call = $user->answer_call($_POST['type'], $_POST['id']);
 
-		case 'decline_call':
-			// valid inputs
-			if(!isset($_POST['id']) || !is_numeric($_POST['id'])) {
-				_error(400);
-			}
+      // return
+      $return['call'] = $call;
+      break;
 
-			// decline call
-			$user->decline_call($_POST['type'], $_POST['id']);
-			break;
+    case 'decline_call':
+      // valid inputs
+      if (!isset($_POST['id']) || !is_numeric($_POST['id'])) {
+        _error(400);
+      }
 
-		case 'update_call':
-			// valid inputs
-			if(!isset($_POST['id']) || !is_numeric($_POST['id'])) {
-				_error(400);
-			}
+      // decline call
+      $user->decline_call($_POST['type'], $_POST['id']);
+      break;
 
-			// update call
-			$user->update_call($_POST['type'], $_POST['id']);
-			break;
+    case 'update_call':
+      // valid inputs
+      if (!isset($_POST['id']) || !is_numeric($_POST['id'])) {
+        _error(400);
+      }
 
-		default:
-			_error(400);
-			break;
-	}
+      // update call
+      $user->update_call($_POST['type'], $_POST['id']);
+      break;
 
-	// return & exit
-	return_json($return);
+    default:
+      _error(400);
+      break;
+  }
 
+  // return & exit
+  return_json($return);
 } catch (Exception $e) {
-	modal("ERROR", __("Error"), $e->getMessage());
+  modal("ERROR", __("Error"), $e->getMessage());
 }
-
-?>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ajax -> core -> theme
  * 
@@ -13,12 +14,10 @@ require('../../../bootstrap.php');
 is_ajax();
 
 // set theme mode (day|night)
-if(isset($_POST['mode'])) {
-	$secured = (get_system_protocol() == "https")? true : false;
-    $expire = time()+2592000;
-    $night_mode = ($_POST['mode'] == "night")? '1' : '0';
-    /* set cookie */
-    setcookie('s_night_mode', $night_mode, $expire, '/', "", $secured, true);
+if (isset($_POST['mode'])) {
+  $secured = (get_system_protocol() == "https") ? true : false;
+  $expire = time() + 2592000;
+  $night_mode = ($_POST['mode'] == "night") ? '1' : '0';
+  /* set cookie */
+  setcookie('s_night_mode', $night_mode, $expire, '/', "", $secured, true);
 }
-
-?>

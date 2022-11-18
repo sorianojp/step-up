@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ajax -> posts -> article
  * 
@@ -16,48 +17,45 @@ is_ajax();
 user_access(true);
 
 // check demo account
-if($user->_data['user_demo']) {
-    modal("ERROR", __("Demo Restriction"), __("You can't do this with demo account"));
+if ($user->_data['user_demo']) {
+  modal("ERROR", __("Demo Restriction"), __("You can't do this with demo account"));
 }
 
 try {
 
-	// initialize the return array
-	$return = array();
-	$return['callback'] = 'window.location.replace(response.path);';
+  // initialize the return array
+  $return = array();
+  $return['callback'] = 'window.location.replace(response.path);';
 
-	switch ($_GET['do']) {
-		case 'create':
-			// create article
-			$post_id = $user->post_article($_POST['title'], $_POST['text'], $_POST['cover'], $_POST['category'], $_POST['tags']);
+  switch ($_GET['do']) {
+    case 'create':
+      // create article
+      $post_id = $user->post_article($_POST['publish_to'], $_POST['page_id'], $_POST['group_id'], $_POST['event_id'], $_POST['title'], $_POST['text'], $_POST['cover'], $_POST['category'], $_POST['tags']);
 
-			// return
-			$return['path'] = $system['system_url'].'/blogs/'.$post_id.'/'.get_url_text($_POST['title']);
-			break;
+      // return
+      $return['path'] = $system['system_url'] . '/blogs/' . $post_id . '/' . get_url_text($_POST['title']);
+      break;
 
-		case 'edit':
-			// valid inputs
-			if(!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-				_error(400);
-			}
-			
-			// edit article
-			$user->edit_article($_GET['id'], $_POST['title'], $_POST['text'], $_POST['cover'], $_POST['category'], $_POST['tags']);
+    case 'edit':
+      // valid inputs
+      if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+        _error(400);
+      }
 
-			// return
-			$return['path'] = $system['system_url'].'/blogs/'.$_GET['id'].'/'.get_url_text($_POST['title']);
-			break;
-		
-		default:
-			_error(400);
-			break;
-	}
+      // edit article
+      $user->edit_article($_GET['id'], $_POST['title'], $_POST['text'], $_POST['cover'], $_POST['category'], $_POST['tags']);
 
-	// return & exit
-	return_json($return);
-	
+      // return
+      $return['path'] = $system['system_url'] . '/blogs/' . $_GET['id'] . '/' . get_url_text($_POST['title']);
+      break;
+
+    default:
+      _error(400);
+      break;
+  }
+
+  // return & exit
+  return_json($return);
 } catch (Exception $e) {
-	return_json( array('error' => true, 'message' => $e->getMessage()) );
+  return_json(array('error' => true, 'message' => $e->getMessage()));
 }
-
-?>

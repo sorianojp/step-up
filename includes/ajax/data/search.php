@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ajax -> data -> search
  * 
@@ -13,29 +14,26 @@ require('../../../bootstrap.php');
 is_ajax();
 
 // valid inputs
-if(!isset($_POST['query'])) {
-	_error(400);
+if (!isset($_POST['query'])) {
+  _error(400);
 }
 
 try {
 
-	// initialize the return array
-	$return = array();
+  // initialize the return array
+  $return = array();
 
-	// get results
-	$results = $user->search_quick($_POST['query']);
-	if($results) {
-		/* assign variables */
-		$smarty->assign('results', $results);
-		/* return */
-		$return['results'] = $smarty->fetch("ajax.search.tpl");
-	}
-	
-	// return & exit
-	return_json($return);
+  // get results
+  $results = $user->search_quick($_POST['query']);
+  if ($results) {
+    /* assign variables */
+    $smarty->assign('results', $results);
+    /* return */
+    $return['results'] = $smarty->fetch("ajax.search.tpl");
+  }
 
+  // return & exit
+  return_json($return);
 } catch (Exception $e) {
-	modal("ERROR", __("Error"), $e->getMessage());
+  modal("ERROR", __("Error"), $e->getMessage());
 }
-
-?>

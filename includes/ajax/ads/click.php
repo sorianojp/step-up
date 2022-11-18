@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ajax -> ads -> click
  * 
@@ -13,20 +14,17 @@ require('../../../bootstrap.php');
 is_ajax();
 
 // valid inputs
-if(!isset($_POST['id']) || !is_numeric($_POST['id'])) {
-	_error(400);
+if (!isset($_POST['id']) || !is_numeric($_POST['id'])) {
+  _error(400);
 }
 
 try {
 
-	// update campaign
-	$user->update_campaign_bidding($_POST['id']);
+  // update campaign
+  $user->update_campaign_bidding($_POST['id']);
 
-	// return & exit
-	return_json();
-	
+  // return & exit
+  return_json();
 } catch (Exception $e) {
-	modal("ERROR", __("Error"), $e->getMessage());
+  modal("ERROR", __("Error"), $e->getMessage());
 }
-
-?>

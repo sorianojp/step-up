@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ajax -> core -> activation phone resend
  * 
@@ -13,20 +14,17 @@ require('../../../bootstrap.php');
 is_ajax();
 
 // check user logged in
-if(!$user->_logged_in) {
-	modal('LOGIN');
+if (!$user->_logged_in) {
+  modal('LOGIN');
 }
 
 try {
 
-	// activation phone resend
-	$user->activation_phone_resend();
+  // activation phone resend
+  $user->activation_phone_resend();
 
-	// return
-	modal("SUCCESS", __("Another SMS has been sent"), __("Please check your phone and copy the verification code to complete the verification process"));
-	
+  // return
+  modal("SUCCESS", __("Another SMS has been sent"), __("Please check your phone and copy the verification code to complete the verification process"));
 } catch (Exception $e) {
-	modal("ERROR", __("Error"), $e->getMessage());
+  modal("ERROR", __("Error"), $e->getMessage());
 }
-
-?>

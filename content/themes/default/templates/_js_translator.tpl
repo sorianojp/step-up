@@ -60,6 +60,7 @@
 {__("Stop Campaign")}
 {__("Resume Campaign")}
 {__("Sorry, WebRTC is not available in your browser")}
+{__("Not able to connect, Try again later!")}
 {__("You are ready to Go Live now")}
 {__("You are offline now")}
 {__("Getting permissions failed")}
@@ -75,6 +76,9 @@
 {__("Video Muted")}
 {__("Audio Muted")}
 {__("Live Ended")}
+{__("Try Package")}
+{__("Are you sure you want to subscribe to this free package?")}
+{__("Your video is being processed, We will let you know when it is ready!")}
 <!-- /_js_files.tpl -->
 
 <!-- _js_files.tpl (DataTables) -->
@@ -110,7 +114,20 @@
 {__("Follow these instructions to allow notifications:")}
 <!-- /_js_files.tpl (OneSignal) -->
 
+<!-- _js_files.tpl (Video.js) -->
+{__("Play")}
+{__("Pause")}
+{__("Mute")}
+{__("Unmute")}
+{__("Current Time")}
+{__("Duration")}
+{__("Remaining Time")}
+{__("Fullscreen")}
+{__("Picture-in-Picture")}
+<!-- /_js_files.tpl (Video.js) -->
+
 <!-- database values -->
+{__("Share your memories, connect with others, make new friends")}
 {__("Cover Photos")}
 {__("Profile Pictures")}
 {__("Timeline Photos")}
@@ -161,10 +178,16 @@
 {__("Appears on the sidebar on article page")}
 {__("Appears on all pages right after the header")}
 {__("Appears on all pages right before the footer")}
+{__("Search for offers")}
+{__("Search for jobs")}
+{__("Stop")}
+{__("Resume")}
+{__("Insert an emoji")}
+{__("Search for movies")}
 <!-- /placeholders & titles -->
 
 <!-- emails -->
-{__("Hi")} 
+{__("Hi")}
 {__("To complete the sign-in process, please use the following 6-digit key")}
 {__("Two-factor authentication key")}
 {__("Team")}

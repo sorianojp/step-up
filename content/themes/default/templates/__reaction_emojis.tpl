@@ -1,79 +1,57 @@
 {if $_reaction == "like"}
 
-	<!-- like -->
-	<div class="emoji emoji--like">
-        <div class="emoji__hand">
-            <div class="emoji__thumb"></div>
-        </div>
-    </div>
-    <!-- like -->
+  <!-- like -->
+  <div class="emoji">
+    <img src="{$system['system_url']}/content/themes/{$system['theme']}/images/reactions/like.png" alt="Like" />
+  </div>
+  <!-- like -->
 
 {elseif $_reaction == "love"}
 
-	<!-- love -->
-	<div class="emoji emoji--love">
-        <div class="emoji__heart"></div>
-    </div>
-	<!-- love -->
+  <!-- love -->
+  <div class="emoji">
+    <img src="{$system['system_url']}/content/themes/{$system['theme']}/images/reactions/love.png" alt="Love" />
+  </div>
+  <!-- love -->
 
 {elseif $_reaction == "haha"}
 
-	<!-- haha -->
-	<div class="emoji emoji--haha">
-        <div class="emoji__face">
-            <div class="emoji__eyes"></div>
-            <div class="emoji__mouth">
-                <div class="emoji__tongue"></div>
-            </div>
-        </div>  
-    </div>
-	<!-- haha -->
+  <!-- haha -->
+  <div class="emoji emoji--haha">
+    <img src="{$system['system_url']}/content/themes/{$system['theme']}/images/reactions/haha.png" alt="Haha" />
+  </div>
+  <!-- haha -->
 
 {elseif $_reaction == "yay"}
 
-	<!-- yay -->
-	<div class="emoji emoji--yay">
-        <div class="emoji__face">
-            <div class="emoji__eyebrows"></div>
-            <div class="emoji__mouth"></div>
-        </div>
-    </div>
-	<!-- yay -->
+  <!-- yay -->
+  <div class="emoji">
+    <img src="{$system['system_url']}/content/themes/{$system['theme']}/images/reactions/yay.png" alt="Yay" />
+  </div>
+  <!-- yay -->
 
 {elseif $_reaction == "wow"}
 
-	<!-- wow -->
-    <div class="emoji emoji--wow">
-        <div class="emoji__face">
-            <div class="emoji__eyebrows"></div>
-            <div class="emoji__eyes"></div>
-            <div class="emoji__mouth"></div>
-        </div>
-    </div>
-    <!-- wow -->
+  <!-- wow -->
+  <div class="emoji">
+    <img src="{$system['system_url']}/content/themes/{$system['theme']}/images/reactions/wow.png" alt="Wow" />
+  </div>
+  <!-- wow -->
 
 {elseif $_reaction == "sad"}
 
-	<!-- sad -->
-    <div class="emoji emoji--sad">
-        <div class="emoji__face">
-            <div class="emoji__eyebrows"></div>
-            <div class="emoji__eyes"></div>
-            <div class="emoji__mouth"></div>
-        </div>
-    </div>
-    <!-- sad -->
+  <!-- sad -->
+  <div class="emoji">
+    <img src="{$system['system_url']}/content/themes/{$system['theme']}/images/reactions/sad.png" alt="Sad" />
+  </div>
+  <!-- sad -->
 
 {elseif $_reaction == "angry"}
 
-	<!-- angry -->
-    <div class="emoji emoji--angry">
-        <div class="emoji__face">
-            <div class="emoji__eyebrows"></div>
-            <div class="emoji__eyes"></div>
-            <div class="emoji__mouth"></div>
-        </div>
-    </div>
-    <!-- angry -->
+  <!-- angry -->
+  <div class="emoji">
+    <img src="{$system['system_url']}/content/themes/{$system['theme']}/images/reactions/angry.png" alt="Angry" />
+  </div>
+  <!-- angry -->
 
 {/if}

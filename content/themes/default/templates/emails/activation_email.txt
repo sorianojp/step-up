@@ -3,6 +3,6 @@
 {__("To complete the activation process, please follow this link")}:
 {$system['system_url']}/activation/{$email_verification_code}
 
-{__("Welcome to")} {$system['system_title']}
+{__("Welcome to")} {__($system['system_title'])}
 
-{$system['system_title']} {__("Team")}
+{__($system['system_title'])} {__("Team")}

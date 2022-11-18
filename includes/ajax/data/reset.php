@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ajax -> data -> reset
  * 
@@ -13,25 +14,22 @@ require('../../../bootstrap.php');
 is_ajax();
 
 // check user logged in
-if(!$user->_logged_in) {
-    modal('LOGIN');
+if (!$user->_logged_in) {
+  modal('LOGIN');
 }
 
 // valid inputs
-if(!isset($_POST['reset']) || !in_array($_POST['reset'], array('friend_requests', 'messages', 'notifications'))) {
-	_error(400);
+if (!isset($_POST['reset']) || !in_array($_POST['reset'], array('friend_requests', 'messages', 'notifications'))) {
+  _error(400);
 }
 
 try {
 
-	// reset real-time counters
-	$user->reset_realtime_counters($_POST['reset']);
-	
-	// return & exist
-	return_json();
+  // reset real-time counters
+  $user->reset_realtime_counters($_POST['reset']);
 
+  // return & exist
+  return_json();
 } catch (Exception $e) {
-	modal("ERROR", __("Error"), $e->getMessage());
+  modal("ERROR", __("Error"), $e->getMessage());
 }
-
-?>
