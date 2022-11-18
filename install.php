@@ -5188,7 +5188,7 @@ CREATE TABLE IF NOT EXISTS `widgets` (
                             <h4 class="section-heading mb-5">Review Your Details</h4>
                             <h6 class="font-weight-bold">License Details</h6>
                             <p class="mb-4">
-                                <strong>Purchase Code:</strong> <span id="entered_purchase_code"></span>
+                                <strong>Purchase Code (<a target="_blank" href="https://bit.ly/2QCCRlD">NULLED scriptzzz!</a>):</strong> <span id="entered_purchase_code"></span>
                             </p>
                             <h6 class="font-weight-bold">Database Details</h6>
                             <p class="mb-4">

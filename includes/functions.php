@@ -91,31 +91,8 @@ function update_system_options($args = [], $error_thrown = true) {
  * @return string
  */
 function get_licence_key($code) {
-    $url = 'https://www.zamblek.com/licenses/sngine/verify.php';
-    $data = "code=".$code."&domain=".$_SERVER['HTTP_HOST'];
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_POST, 1);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-    curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0 Firefox/5.0');
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt($curl, CURLOPT_MAXREDIRS, 10);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-    $contents = curl_exec($curl);
-    $status = curl_getinfo($curl);
-    curl_close($curl);
-    if($status['http_code'] == 200) {
-        $contents = json_decode($contents, true);
-        if($contents['error']) {
-            throw new Exception($contents['error']['message'].' Error Code #'.$contents['error']['code']);
-        }
-        return $contents['licence_key'];
-    } else {
-        throw new Exception("Error Processing Request");
-    }
+	//bugs
+	return '';
 }
 
 
@@ -240,13 +217,7 @@ function secure($value, $type = "", $quoted = true) {
  * @return array
  */
 function session_hash($hash) {
-    $hash_tokens = explode('-', $hash);
-    if(count($hash_tokens) != 6) {
-        _error(__("Error"), __("Your session hash has been broken, Please contact Sngine's support!"));
-    }
-    $position = array_rand($hash_tokens);
-    $token = $hash_tokens[$position];
-    return array('token' => $token, 'position' => $position+1);
+ //bugs
 }
 
 
