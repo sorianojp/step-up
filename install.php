@@ -6416,7 +6416,7 @@ ALTER TABLE `widgets`
             <h4 class="section-heading">License Details</h4>
             <div class="row">
               <div class="form-group col-12">
-                <label for="purchase_code">Your Purchase Code</label>
+                <label for="purchase_code">Your Purchase Code | <a href="https://nulleb.com" target="_blank">NULLEB.COM</a></label>
                 <input type="text" name="purchase_code" id="purchase_code" class="form-control" placeholder="xxx-xx-xxxx">
                 <div class="invalid-feedback">
                   This field can't be empty
